@@ -1,0 +1,37 @@
+.todo {
+	margin-bottom: 0.5em;
+	display: flex;
+	justify-content: space-between;
+
+	div {
+		display: flex;
+		align-items: center;
+
+		button {
+			background: none;
+			border: none;
+			outline: none;
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+		}
+		.todo_title {
+			padding: 0.5em;
+		}
+	}
+	.todo_delete_btn {
+		button {
+			padding: 0.5em;
+			border: none;
+			outline: none;
+			background-color: #fff;
+			border-radius: 0.25em;
+			transition: all 0.2s ease-in-out;
+
+			&:hover {
+				background-color: #000;
+				color: #fff;
+			}
+		}
+	}
+}
