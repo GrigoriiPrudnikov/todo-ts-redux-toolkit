@@ -1,30 +1,41 @@
+// Import necessary modules and components
 import { ChangeEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './App.scss'
 import TodoItem from './components/TodoItem/TodoItem'
 
+// Import Redux actions and types
 import { toggleLists } from './store/list/list.slice'
 import { RootState } from './store/store'
 import { addImportantTodo, addTodo } from './store/todos/todos.slice'
 import { TypeTodo } from './types/types'
 
+// Define the structure of the ITodos interface
 export interface ITodos {
 	items: TypeTodo[]
 }
 
+// Define the main App component
 export default function App() {
-	const dispatch = useDispatch()
-	const todos = useSelector((state: RootState) => state.todos.items)
-	const list = useSelector((state: RootState) => state.lists.name)
-	const [todo, setTodo] = useState<string>('')
+	const dispatch = useDispatch() // Get the Redux dispatch function
+	const todos = useSelector((state: RootState) => state.todos.items) // Get the todos array from Redux state
+	const list = useSelector((state: RootState) => state.lists.name) // Get the current list filter from Redux state
+	const [todo, setTodo] = useState<string>('') // State for storing the new todo input value
 
+	// Handler for updating the todo input value
 	const todoHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setTodo(e.target.value)
 	}
+
+	// Function for adding a new todo
 	const addNewTodo = () => {
-		if (list === 'important') dispatch(addImportantTodo(todo))
-		else dispatch(addTodo(todo))
-		setTodo('')
+		// Dispatch relevant action based on the selected list filter
+		if (list === 'important') {
+			dispatch(addImportantTodo(todo)) // Add important todo
+		} else {
+			dispatch(addTodo(todo)) // Add regular todo
+		}
+		setTodo('') // Clear the input field
 	}
 
 	return (
